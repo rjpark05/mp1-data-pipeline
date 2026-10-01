@@ -11,6 +11,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from data_loaders import load_data
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +25,6 @@ def setup_logging(verbose=False):
         format="%(asctime)s %(levelname)-8s %(message)s",
         datefmt="%H:%M:%S",
     )
-    pass  # TODO: implement
 
 
 def parse_arguments():
@@ -42,7 +42,6 @@ def parse_arguments():
         "--verbose", "-v", action="store_true", help="Enable verbose logging"
     )
     return parser.parse_args()
-    pass  # TODO: implement
 
 
 def validate_input(filepath):
@@ -52,7 +51,7 @@ def validate_input(filepath):
         return False
     logger.info("Input file validated: %s", filepath)
     return True
-    pass  # TODO: implement
+
 
 
 def main():
@@ -67,7 +66,11 @@ def main():
 
     if not validate_input(args.input):
         sys.exit(1)
-    pass  # TODO: implement
+
+    try:
+        data = load_data(args.input)
+    except ValueError:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
