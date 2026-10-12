@@ -14,3 +14,5 @@ Thumbs.db
 # Virtiual Environment
 venv/
 
+#output
+output/
